@@ -47,6 +47,10 @@ export const getCompany = async (id) => {
       company(id: $id) {
         name
         description
+        jobs {
+          id
+          title
+        }
       }
     }
   `
