@@ -18,8 +18,9 @@ export async function login(email, password) {
     body: JSON.stringify({ email, password }),
   });
   if (response.ok) {
-    const { token } = await response.json();
+    const { token, companyId } = await response.json();
     localStorage.setItem(ACCESS_TOKEN_KEY, token);
+    localStorage.setItem("company", companyId)
   }
   return response.ok;
 }

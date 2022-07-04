@@ -23,7 +23,7 @@ app.post('/login', async (req, res) => {
   const user = await User.findOne((user) => user.email === email);
   if (user && user.password === password) {
     const token = jwt.sign({ sub: user.id }, JWT_SECRET);
-    res.json({ token });  
+    res.json({ token, companyId: user.companyId });  
   } else {
     res.sendStatus(401);
   }

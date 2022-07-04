@@ -1,12 +1,19 @@
 import { useState } from 'react';
+import { createJob } from '../graphql/queries'
 
 function JobForm() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [newJob, setNewJob] = useState()
+  const companyId = localStorage.getItem('company')
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('should post a new job:', { title, description });
+    createJob(title, companyId, description)
+      .then(setNewJob)
+
+    setDescription("")
+    setTitle("")
   };
 
   return (

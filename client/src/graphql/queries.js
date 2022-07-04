@@ -59,3 +59,39 @@ export const getCompany = async (id) => {
   const { company } = await request(GRAPHQL_URL, query, variables)
   return company
 }
+
+export const createJob = async (title, companyId, description) => {
+  const mutation = gql`
+    mutation CreateJobMutation($title: String!, $companyId: ID!, $description: String) {
+      createJob(
+        title: $title,
+        companyId: $companyId,
+        description: $description
+      ) {
+        id
+        title
+        company {
+          id
+          name
+        }
+      }
+    }
+  `
+
+  const variables = {title, companyId, description}
+  const { newJob } = await request(GRAPHQL_URL, mutation, variables)
+  return newJob
+}
+
+export const deleteJob = async (id) => {
+
+  const mutation = gql`
+    mutation deleteJob($id: ID!) {
+      deleteJob(id: $id)
+    }
+  `
+
+  const variable = { id }
+  const deleteJob = await request(GRAPHQL_URL, mutation, variable)
+  return deleteJob
+}
