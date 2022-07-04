@@ -7,7 +7,6 @@ function JobBoard() {
 
   useEffect(() => {
     getJobs().then(setJobs)
-    console.log(job)
   }, [])
 
   return (

@@ -1,11 +1,25 @@
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { jobs } from '../fake-data';
+import { getJob } from '../graphql/queries'
 
 function JobDetail() {
   const { jobId } = useParams();
+  const [job, setJob] = useState({
+    title: "",
+    company: {
+      id: "",
+      name: ""
+    },
+    description: ""
+  })
 
-  const job = jobs.find((job) => job.id === jobId);
+  useEffect(() => {
+    
+    getJob(jobId).then(setJob)
+
+  },[jobId])
+
   return (
     <div>
       <h1 className="title">
